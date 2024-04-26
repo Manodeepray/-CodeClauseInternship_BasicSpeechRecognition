@@ -11,7 +11,6 @@ import tensorflow as tf
 from plot_functions import plot_example , set_axes , plot_spectrogram , display_audio_label , plot_model_metrics , plot_confusion_matrix
 from IPython import display
 from models import load_model , comlpile_model , train_model
-import export_model 
 import matplotlib.pyplot as plt
 def main():
     
@@ -113,15 +112,6 @@ def main():
     print(" running inference...")
     run_inference(model, x)
     print("finished running inference...")
-    print("exporting model ...")
-    export = export_model.ExportModel(model,label_names)
-    export(tf.constant(str(data_dir/'no/01bb6a2a_nohash_0.wav')))
-    print("finished exporting...")
-    
-    
-    tf.saved_model.save(export, "saved")
-    imported = tf.saved_model.load("saved")
-    imported(waveform[tf.newaxis, :])
     
     print("finished ...")
 
